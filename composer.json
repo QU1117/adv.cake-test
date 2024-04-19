@@ -1,0 +1,10 @@
+{
+    "description": "Тестовое для Adv.Cake",
+    "authors": [
+        {
+            "name": "Dimitry Boyko",
+            "email": "n30nv4mp@yandex.ru"
+        }
+    ],
+    "require": {}
+}

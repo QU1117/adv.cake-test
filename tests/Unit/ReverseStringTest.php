@@ -15,4 +15,15 @@ describe('Тестирование инверсии строк', function () {
                 ->toBe($reversedString);
         }
     );
+
+    test(
+        "Переворачивает строку 'Мышь'",
+        function () use ($stringManipulator) {
+            $originalString = 'Мышь';
+            $reversedString = 'Ьшым';
+
+            expect($stringManipulator->reverseString($originalString))
+                ->toBe($reversedString);
+        }
+    );
 });

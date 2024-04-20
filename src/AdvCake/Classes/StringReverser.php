@@ -32,6 +32,7 @@ class StringReverser implements StringReverserInterface
         $words = $matches[0];
 
         $result = '';
+        $charCounter = 0;
 
         foreach($words as $word) {
             $chars = mb_str_split($word);
@@ -41,11 +42,23 @@ class StringReverser implements StringReverserInterface
                 for ($i = 0; $i < mb_strlen($reversedString); $i++) {
                     $char = mb_substr($reversedString, $i, 1);
 
-                    if ($caseRegistry[$i]) {
+                    if ($caseRegistry[$charCounter]) {
                         $result .= mb_convert_case($char, MB_CASE_UPPER);
-                    } else $result .= mb_convert_case($char, MB_CASE_LOWER);
+                    } else  {
+                        $result .= mb_convert_case($char, MB_CASE_LOWER);
+                    }
+
+                    if ($charCounter < array_key_last($caseRegistry)) {
+                        $charCounter++;
+                    }
                 }
-            } else $result .= $reversedString;
+            } else {
+                $result .= $reversedString;
+
+                if ($charCounter < array_key_last($caseRegistry)) {
+                    $charCounter++;
+                }
+            }
         }
 
         return $result;

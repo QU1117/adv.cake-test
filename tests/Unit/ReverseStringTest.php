@@ -108,7 +108,18 @@ describe('Тестирование инверсии строк', function () {
         "Переворачивает строку 'can`t'",
         function () use ($stringManipulator) {
             $originalString = 'can`t';
-            $reversedString =  'nac`t';
+            $reversedString = 'nac`t';
+
+            expect($stringManipulator->reverseString($originalString))
+                ->toBe($reversedString);
+        }
+    );
+
+    test(
+        "Переворачивает строку '☆☆Hello, woRlD!~+'",
+        function () use ($stringManipulator) {
+            $originalString = '☆☆Hello, woRlD!~+';
+            $reversedString = '☆☆Olleh, dlRoW!~+';
 
             expect($stringManipulator->reverseString($originalString))
                 ->toBe($reversedString);

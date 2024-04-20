@@ -24,17 +24,28 @@ class StringReverser implements StringReverserInterface
             }
         }
 
-        $chars = mb_str_split($sentence);
-        $reversedString = implode('', array_reverse($chars));
+        preg_match_all(
+            '/\s+|[\pL\pN\']+|[^\\pL\\pN\s]/u',
+            $sentence,
+            $matches
+        );
+        $words = $matches[0];
 
         $result = '';
 
-        for ($i = 0; $i < mb_strlen($reversedString); $i++) {
-            $char = mb_substr($reversedString, $i, 1);
+        foreach($words as $word) {
+            $chars = mb_str_split($word);
+            $reversedString = implode('', array_reverse($chars));
 
-            if ($caseRegistry[$i]) {
-                $result .= mb_convert_case($char, MB_CASE_UPPER);
-            } else $result .= mb_convert_case($char, MB_CASE_LOWER);
+            if (preg_match('/^\pL+$/u', $reversedString)) {
+                for ($i = 0; $i < mb_strlen($reversedString); $i++) {
+                    $char = mb_substr($reversedString, $i, 1);
+
+                    if ($caseRegistry[$i]) {
+                        $result .= mb_convert_case($char, MB_CASE_UPPER);
+                    } else $result .= mb_convert_case($char, MB_CASE_LOWER);
+                }
+            } else $result .= $reversedString;
         }
 
         return $result;

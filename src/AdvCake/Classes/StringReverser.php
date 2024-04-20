@@ -14,37 +14,27 @@ class StringReverser implements StringReverserInterface
     {
         $caseRegistry = [];
 
-        for ($i = 0; $i < mb_strlen($sentence, mb_internal_encoding()); $i++) {
-            $char = mb_substr($sentence, $i, 1, mb_internal_encoding());
+        for ($i = 0; $i < mb_strlen($sentence); $i++) {
+            $char = mb_substr($sentence, $i, 1);
 
-            if (mb_strtolower($char, mb_internal_encoding()) === $char) {
+            if (mb_strtolower($char) === $char) {
                 $caseRegistry[$i] = false;
-            } else if (mb_strtoupper($char, mb_internal_encoding()) === $char) {
+            } else if (mb_strtoupper($char) === $char) {
                 $caseRegistry[$i] = true;
             }
         }
 
-        $chars = mb_str_split($sentence, 1, mb_internal_encoding());
+        $chars = mb_str_split($sentence);
         $reversedString = implode('', array_reverse($chars));
 
         $result = '';
 
-        for ($i = 0;
-             $i < mb_strlen($reversedString, mb_internal_encoding());
-             $i++)
-        {
-            $char = mb_substr($reversedString, $i, 1, mb_internal_encoding());
+        for ($i = 0; $i < mb_strlen($reversedString); $i++) {
+            $char = mb_substr($reversedString, $i, 1);
 
             if ($caseRegistry[$i]) {
-                $result .= mb_convert_case(
-                    $char,
-                    MB_CASE_UPPER,
-                    mb_internal_encoding()
-                );
-            } else $result .= mb_convert_case(
-                $char,
-                MB_CASE_LOWER,
-                mb_internal_encoding());
+                $result .= mb_convert_case($char, MB_CASE_UPPER);
+            } else $result .= mb_convert_case($char, MB_CASE_LOWER);
         }
 
         return $result;

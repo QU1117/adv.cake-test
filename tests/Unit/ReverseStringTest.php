@@ -86,7 +86,29 @@ describe('Тестирование инверсии строк', function () {
         "Переворачивает строку 'это «Так» \"просто\"'",
         function () use ($stringManipulator) {
             $originalString = 'это «Так» "просто"';
-            $reversedString =  'отэ «Так» "отсорп"';
+            $reversedString =  'отэ «Кат» "отсорп"';
+
+            expect($stringManipulator->reverseString($originalString))
+                ->toBe($reversedString);
+        }
+    );
+
+    test(
+        "Переворачивает строку 'third-part'",
+        function () use ($stringManipulator) {
+            $originalString = 'third-part';
+            $reversedString = 'driht-trap';
+
+            expect($stringManipulator->reverseString($originalString))
+                ->toBe($reversedString);
+        }
+    );
+
+    test(
+        "Переворачивает строку 'can`t'",
+        function () use ($stringManipulator) {
+            $originalString = 'can`t';
+            $reversedString =  'nac`t';
 
             expect($stringManipulator->reverseString($originalString))
                 ->toBe($reversedString);

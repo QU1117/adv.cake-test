@@ -2,8 +2,8 @@
 
 require __DIR__.'/vendor/autoload.php';
 
-use AdvCake\Classes\StringReverser;
+use AdvCake\Classes\StringReverserFactory;
 
-$stringReverser = new StringReverser();
+$stringManipulator = (new StringReverserFactory())->createStringManipulator();
 
-echo $stringReverser->reverseString($argv[1]);
+echo $stringManipulator->reverseString($argv[1]);
